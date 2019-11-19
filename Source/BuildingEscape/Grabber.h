@@ -40,4 +40,6 @@ private:
 
 	/// Raycast and grab item in reach
 	void Grab();
+	/// Called when grab key is relased
+	void Released();
 };

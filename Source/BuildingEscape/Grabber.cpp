@@ -39,7 +39,8 @@ void UGrabber::BeginPlay()
 
 	if(Input)
 	{
-		Input->BindAction("Grab", IE_Pressed, this, &UGrabber::Grab)
+		Input->BindAction("Grab", IE_Pressed, this, &UGrabber::Grab);
+		Input->BindAction("Grab", IE_Released, this, &UGrabber::Released);
 	}
 	else
 	{
@@ -76,7 +77,7 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 
 	/// Setup query parameters
 	FCollisionQueryParams TraceParameters(FName(TEXT("")), false, GetOwner());
-
+	/// Linetrace for objects that are Physics bodies
 	FHitResult Hit;
 	GetWorld()->LineTraceSingleByObjectType(
 		OUT Hit,
@@ -87,7 +88,7 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 	);
 
 	AActor* ActorHit = Hit.GetActor();
-
+	/// see if actor was if it was get it's name
 	if (ActorHit)
 	{
 		UE_LOG(LogTemp, Log, TEXT("Objects name is %s"), *ActorHit->GetName());
@@ -97,4 +98,9 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 void UGrabber::Grab()
 {
 	UE_LOG(LogTemp, Log, TEXT("You grabbed the object"));
+}
+
+void UGrabber::Released()
+{
+	UE_LOG(LogTemp, Log, TEXT("You release the object"));
 }
