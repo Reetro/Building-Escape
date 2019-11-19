@@ -6,6 +6,7 @@
 #include "Components/ActorComponent.h"
 #include "GameFramework/Actor.h"
 #include "Engine/TriggerVolume.h"
+#include "Engine/World.h"
 #include "OpenDoor.generated.h"
 
 
@@ -18,6 +19,7 @@ public:
 	// Sets default values for this component's properties
 	UOpenDoor();
 	void OpenDoor();
+	void CloseDoor();
 
 protected:
 	// Called when the game starts
@@ -29,11 +31,18 @@ public:
 
 
 private:
-	UPROPERTY(VisibleAnywhere)
-	float OpenAngle = 90.0f;
+	UPROPERTY(EditAnywhere)
+	float OpenAngle = -90.0f;
 
 	UPROPERTY(EditAnywhere)
 	ATriggerVolume* PressurePlate;
 
+	UPROPERTY(EditAnywhere)
+	float DoorCloseDelay = 1.f;
+
+	float LastDoorOpenTime;
+
 	AActor* ActorThatOpens;
+
+	AActor* Owner;
 };
