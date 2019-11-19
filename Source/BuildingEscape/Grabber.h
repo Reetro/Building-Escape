@@ -9,6 +9,7 @@
 #include "Engine/World.h"
 #include "CollisionQueryParams.h"
 #include "PhysicsEngine/PhysicsHandleComponent.h"
+#include "Components/InputComponent.h"
 #include "Grabber.generated.h"
 
 
@@ -34,4 +35,9 @@ private:
 	float Reach = 100.f;
 
 	UPhysicsHandleComponent* PhysicsHandle = nullptr;
+
+	UInputComponent* Input = nullptr;
+
+	/// Raycast and grab item in reach
+	void Grab();
 };

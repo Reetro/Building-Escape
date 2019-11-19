@@ -33,6 +33,18 @@ void UGrabber::BeginPlay()
 	{
 		UE_LOG(LogTemp, Error, TEXT("%s does not have a physics handler"), *GetOwner()->GetName());
 	}
+
+	/// Look for attached input component(Is created at runtime)
+	Input = GetOwner()->FindComponentByClass<UInputComponent>();
+
+	if(Input)
+	{
+		Input->BindAction("Grab", IE_Pressed, this, &UGrabber::Grab)
+	}
+	else
+	{
+		UE_LOG(LogTemp, Error, TEXT("%s does not have a Input Component"), *GetOwner()->GetName());
+	}
 	
 }
 
@@ -82,3 +94,7 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 	}
 }
 
+void UGrabber::Grab()
+{
+	UE_LOG(LogTemp, Log, TEXT("You grabbed the object"));
+}
