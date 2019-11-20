@@ -23,30 +23,10 @@ void UGrabber::BeginPlay()
 	Super::BeginPlay();
 
 	/// Look for attached physics handler
-	PhysicsHandle = GetOwner()->FindComponentByClass<UPhysicsHandleComponent>();
-
-	if (PhysicsHandle)
-	{
-		// Has Physics Handler	
-	}
-	else
-	{
-		UE_LOG(LogTemp, Error, TEXT("%s does not have a physics handler"), *GetOwner()->GetName());
-	}
+  FindAttachedPhysicsComponent();
 
 	/// Look for attached input component(Is created at runtime)
-	Input = GetOwner()->FindComponentByClass<UInputComponent>();
-
-	if(Input)
-	{
-		Input->BindAction("Grab", IE_Pressed, this, &UGrabber::Grab);
-		Input->BindAction("Grab", IE_Released, this, &UGrabber::Released);
-	}
-	else
-	{
-		UE_LOG(LogTemp, Error, TEXT("%s does not have a Input Component"), *GetOwner()->GetName());
-	}
-	
+  FindAttachedInputComponent();
 }
 
 
@@ -103,4 +83,33 @@ void UGrabber::Grab()
 void UGrabber::Released()
 {
 	UE_LOG(LogTemp, Log, TEXT("You release the object"));
+}
+
+void UGrabber::FindAttachedPhysicsComponent()
+{
+  PhysicsHandle = GetOwner()->FindComponentByClass<UPhysicsHandleComponent>();
+
+  if (PhysicsHandle)
+  {
+    // Has Physics Handler	
+  }
+  else
+  {
+    UE_LOG(LogTemp, Error, TEXT("%s does not have a physics handler"), *GetOwner()->GetName());
+  }
+}
+
+void UGrabber::FindAttachedInputComponent()
+{
+  Input = GetOwner()->FindComponentByClass<UInputComponent>();
+
+  if (Input)
+  {
+    Input->BindAction("Grab", IE_Pressed, this, &UGrabber::Grab);
+    Input->BindAction("Grab", IE_Released, this, &UGrabber::Released);
+  }
+  else
+  {
+    UE_LOG(LogTemp, Error, TEXT("%s does not have a Input Component"), *GetOwner()->GetName());
+  }
 }

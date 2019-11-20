@@ -42,4 +42,8 @@ private:
 	void Grab();
 	/// Called when grab key is relased
 	void Released();
+
+  void FindAttachedPhysicsComponent();
+
+  void FindAttachedInputComponent();
 };
