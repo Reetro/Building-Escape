@@ -7,6 +7,7 @@
 #include "GameFramework/Actor.h"
 #include "Engine/TriggerVolume.h"
 #include "Engine/World.h"
+#include "Components/PrimitiveComponent.h"
 #include "OpenDoor.generated.h"
 
 
@@ -42,7 +43,8 @@ private:
 
 	float LastDoorOpenTime;
 
-	AActor* ActorThatOpens;
-
 	AActor* Owner;
+
+  // Returns total mass in kg
+  float GetTotalMassOfActorsOnPlate();
 };
