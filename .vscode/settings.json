@@ -1,7 +1,9 @@
 {
 	"files.exclude": {
-		"D:/Programing Projects/GitHub/Building-Escape/BuildingEscape/.vscode": true,
-		"D:/Programing Projects/GitHub/Building-Escape/BuildingEscape/Content": true,
-		"D:/Programing Projects/GitHub/Building-Escape/BuildingEscape/Intermediate": true
+		"D:/Programing Projects/GitHub/Building Escape/.git": true,
+		"D:/Programing Projects/GitHub/Building Escape/.vscode": true,
+		"D:/Programing Projects/GitHub/Building Escape/Content": true,
+		"D:/Programing Projects/GitHub/Building Escape/Intermediate": true,
+		"D:/Programing Projects/GitHub/Building Escape/Saved": true
 	}
 }

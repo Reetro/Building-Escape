@@ -5,7 +5,7 @@
 			"name": "BuildingEscape (Debug)",
 			"request": "launch",
 			"preLaunchTask": "BuildingEscape Win64 Debug Build",
-			"program": "D:\\Programing Projects\\GitHub\\Building-Escape\\BuildingEscape\\Binaries\\Win64\\UE4-Win64-Debug.exe",
+			"program": "D:\\Programing Projects\\GitHub\\Building Escape\\Binaries\\Win64\\UE4-Win64-Debug.exe",
 			"args": [
 			],
 			"cwd": "D:\\EpicGames\\UE_4.23",
@@ -18,7 +18,7 @@
 			"name": "BuildingEscape (DebugGame)",
 			"request": "launch",
 			"preLaunchTask": "BuildingEscape Win64 DebugGame Build",
-			"program": "D:\\Programing Projects\\GitHub\\Building-Escape\\BuildingEscape\\Binaries\\Win64\\UE4-Win64-DebugGame.exe",
+			"program": "D:\\Programing Projects\\GitHub\\Building Escape\\Binaries\\Win64\\UE4-Win64-DebugGame.exe",
 			"args": [
 			],
 			"cwd": "D:\\EpicGames\\UE_4.23",
@@ -31,7 +31,7 @@
 			"name": "BuildingEscape (Development)",
 			"request": "launch",
 			"preLaunchTask": "BuildingEscape Win64 Development Build",
-			"program": "D:\\Programing Projects\\GitHub\\Building-Escape\\BuildingEscape\\Binaries\\Win64\\UE4.exe",
+			"program": "D:\\Programing Projects\\GitHub\\Building Escape\\Binaries\\Win64\\UE4.exe",
 			"args": [
 			],
 			"cwd": "D:\\EpicGames\\UE_4.23",
@@ -44,7 +44,7 @@
 			"name": "BuildingEscape (Shipping)",
 			"request": "launch",
 			"preLaunchTask": "BuildingEscape Win64 Shipping Build",
-			"program": "D:\\Programing Projects\\GitHub\\Building-Escape\\BuildingEscape\\Binaries\\Win64\\UE4-Win64-Shipping.exe",
+			"program": "D:\\Programing Projects\\GitHub\\Building Escape\\Binaries\\Win64\\UE4-Win64-Shipping.exe",
 			"args": [
 			],
 			"cwd": "D:\\EpicGames\\UE_4.23",
@@ -57,7 +57,7 @@
 			"name": "BuildingEscape (Test)",
 			"request": "launch",
 			"preLaunchTask": "BuildingEscape Win64 Test Build",
-			"program": "D:\\Programing Projects\\GitHub\\Building-Escape\\BuildingEscape\\Binaries\\Win64\\UE4-Win64-Test.exe",
+			"program": "D:\\Programing Projects\\GitHub\\Building Escape\\Binaries\\Win64\\UE4-Win64-Test.exe",
 			"args": [
 			],
 			"cwd": "D:\\EpicGames\\UE_4.23",
@@ -72,7 +72,7 @@
 			"preLaunchTask": "BuildingEscapeEditor Win64 Debug Build",
 			"program": "D:\\EpicGames\\UE_4.23\\Engine\\Binaries\\Win64\\UE4Editor-Win64-Debug.exe",
 			"args": [
-				"D:\\Programing Projects\\GitHub\\Building-Escape\\BuildingEscape\\BuildingEscape.uproject"
+				"D:\\Programing Projects\\GitHub\\Building Escape\\BuildingEscape.uproject"
 			],
 			"cwd": "D:\\EpicGames\\UE_4.23",
 			"stopAtEntry": false,
@@ -86,7 +86,7 @@
 			"preLaunchTask": "BuildingEscapeEditor Win64 DebugGame Build",
 			"program": "D:\\EpicGames\\UE_4.23\\Engine\\Binaries\\Win64\\UE4Editor-Win64-DebugGame.exe",
 			"args": [
-				"D:\\Programing Projects\\GitHub\\Building-Escape\\BuildingEscape\\BuildingEscape.uproject"
+				"D:\\Programing Projects\\GitHub\\Building Escape\\BuildingEscape.uproject"
 			],
 			"cwd": "D:\\EpicGames\\UE_4.23",
 			"stopAtEntry": false,
@@ -100,7 +100,7 @@
 			"preLaunchTask": "BuildingEscapeEditor Win64 Development Build",
 			"program": "D:\\EpicGames\\UE_4.23\\Engine\\Binaries\\Win64\\UE4Editor.exe",
 			"args": [
-				"D:\\Programing Projects\\GitHub\\Building-Escape\\BuildingEscape\\BuildingEscape.uproject"
+				"D:\\Programing Projects\\GitHub\\Building Escape\\BuildingEscape.uproject"
 			],
 			"cwd": "D:\\EpicGames\\UE_4.23",
 			"stopAtEntry": false,
@@ -117,7 +117,7 @@
 			"args": [
 				"-projectfiles",
 				"-vscode",
-				"-project=\"D:\\Programing Projects\\GitHub\\Building-Escape\\BuildingEscape\\BuildingEscape.uproject\"",
+				"-project=\"D:\\Programing Projects\\GitHub\\Building Escape\\BuildingEscape.uproject\"",
 				"-game",
 				"-engine"
 			],
