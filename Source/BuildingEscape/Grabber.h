@@ -46,4 +46,6 @@ private:
   void FindAttachedPhysicsComponent();
 
   void FindAttachedInputComponent();
+
+  FHitResult GetFirstPhysicsBodyInReach() const;
 };

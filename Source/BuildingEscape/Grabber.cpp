@@ -34,50 +34,13 @@ void UGrabber::BeginPlay()
 void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
-	FVector PlayerViewPointLocation;
-	FRotator PlayerViewPointRotation;
-
-	GetWorld()->GetFirstPlayerController()->GetPlayerViewPoint(
-		OUT PlayerViewPointLocation,
-		OUT PlayerViewPointRotation
-	);
-
-	FVector LineTraceEnd = PlayerViewPointLocation + PlayerViewPointRotation.Vector() * Reach;
-
-	DrawDebugLine(
-		GetWorld(),
-		PlayerViewPointLocation,
-		LineTraceEnd,
-		FColor(255, 0, 0),
-		0.f,
-		0.f,
-		10.f
-	);
-
-	/// Setup query parameters
-	FCollisionQueryParams TraceParameters(FName(TEXT("")), false, GetOwner());
-	/// Linetrace for objects that are Physics bodies
-	FHitResult Hit;
-	GetWorld()->LineTraceSingleByObjectType(
-		OUT Hit,
-		PlayerViewPointLocation,
-		LineTraceEnd,
-		FCollisionObjectQueryParams(ECollisionChannel::ECC_PhysicsBody),
-		TraceParameters
-	);
-
-	AActor* ActorHit = Hit.GetActor();
-	/// see if actor was if it was get it's name
-	if (ActorHit)
-	{
-		UE_LOG(LogTemp, Log, TEXT("Objects name is %s"), *ActorHit->GetName());
-	}
 }
 
 void UGrabber::Grab()
 {
 	UE_LOG(LogTemp, Log, TEXT("You grabbed the object"));
+
+  GetFirstPhysicsBodyInReach();
 }
 
 void UGrabber::Released()
@@ -112,4 +75,38 @@ void UGrabber::FindAttachedInputComponent()
   {
     UE_LOG(LogTemp, Error, TEXT("%s does not have a Input Component"), *GetOwner()->GetName());
   }
+}
+
+FHitResult UGrabber::GetFirstPhysicsBodyInReach() const
+{
+  FVector PlayerViewPointLocation;
+  FRotator PlayerViewPointRotation;
+
+  GetWorld()->GetFirstPlayerController()->GetPlayerViewPoint(
+    OUT PlayerViewPointLocation,
+    OUT PlayerViewPointRotation
+  );
+
+  FVector LineTraceEnd = PlayerViewPointLocation + PlayerViewPointRotation.Vector() * Reach;
+
+  /// Setup query parameters
+  FCollisionQueryParams TraceParameters(FName(TEXT("")), false, GetOwner());
+  /// Linetrace for objects that are Physics bodies
+  FHitResult Hit;
+  GetWorld()->LineTraceSingleByObjectType(
+    OUT Hit,
+    PlayerViewPointLocation,
+    LineTraceEnd,
+    FCollisionObjectQueryParams(ECollisionChannel::ECC_PhysicsBody),
+    TraceParameters
+  );
+
+  AActor* ActorHit = Hit.GetActor();
+  /// see if actor was if it was get it's name
+  if (ActorHit)
+  {
+    UE_LOG(LogTemp, Log, TEXT("Objects name is %s"), *ActorHit->GetName());
+  }
+
+  return FHitResult();
 }
