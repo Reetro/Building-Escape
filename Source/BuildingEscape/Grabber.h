@@ -10,6 +10,7 @@
 #include "CollisionQueryParams.h"
 #include "PhysicsEngine/PhysicsHandleComponent.h"
 #include "Components/InputComponent.h"
+#include "Components/PrimitiveComponent.h"
 #include "Grabber.generated.h"
 
 
@@ -47,5 +48,5 @@ private:
 
   void FindAttachedInputComponent();
 
-  FHitResult GetFirstPhysicsBodyInReach() const;
+  const FHitResult GetFirstPhysicsBodyInReach();
 };

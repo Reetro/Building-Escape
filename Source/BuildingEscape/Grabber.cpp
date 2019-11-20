@@ -34,18 +34,47 @@ void UGrabber::BeginPlay()
 void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+
+  FVector PlayerViewPointLocation;
+  FRotator PlayerViewPointRotation;
+  GetWorld()->GetFirstPlayerController()->GetPlayerViewPoint(
+    OUT PlayerViewPointLocation,
+    OUT PlayerViewPointRotation
+  );
+
+  FVector LineTraceEnd = PlayerViewPointLocation + PlayerViewPointRotation.Vector() * Reach;
+
+  if (PhysicsHandle->GrabbedComponent)
+  {
+    PhysicsHandle->SetTargetLocation(LineTraceEnd);
+  }
 }
 
-void UGrabber::Grab()
-{
-	UE_LOG(LogTemp, Log, TEXT("You grabbed the object"));
+void UGrabber::Grab() {
+  UE_LOG(LogTemp, Warning, TEXT("Grab pressed"))
 
-  GetFirstPhysicsBodyInReach();
+    /// LINE TRACE and see if we reach any actors with physics body collision channel set
+  auto HitResult = GetFirstPhysicsBodyInReach();
+  auto ComponentToGrab = HitResult.GetComponent();
+  auto ActorHit = HitResult.GetActor();
+
+  /// If we hit something then attach a physics handle
+  if (ActorHit)
+  {
+    // attach physics handle
+    PhysicsHandle->GrabComponent(
+      ComponentToGrab,
+      NAME_None,
+      ComponentToGrab->GetOwner()->GetActorLocation(),
+      true
+    );
+  }
 }
 
 void UGrabber::Released()
 {
 	UE_LOG(LogTemp, Log, TEXT("You release the object"));
+  PhysicsHandle->ReleaseComponent();
 }
 
 void UGrabber::FindAttachedPhysicsComponent()
@@ -77,11 +106,11 @@ void UGrabber::FindAttachedInputComponent()
   }
 }
 
-FHitResult UGrabber::GetFirstPhysicsBodyInReach() const
+const FHitResult UGrabber::GetFirstPhysicsBodyInReach()
 {
+  /// Get player view point this tick
   FVector PlayerViewPointLocation;
   FRotator PlayerViewPointRotation;
-
   GetWorld()->GetFirstPlayerController()->GetPlayerViewPoint(
     OUT PlayerViewPointLocation,
     OUT PlayerViewPointRotation
@@ -91,7 +120,8 @@ FHitResult UGrabber::GetFirstPhysicsBodyInReach() const
 
   /// Setup query parameters
   FCollisionQueryParams TraceParameters(FName(TEXT("")), false, GetOwner());
-  /// Linetrace for objects that are Physics bodies
+
+  /// Line-trace (AKA ray-cast) out to reach distance
   FHitResult Hit;
   GetWorld()->LineTraceSingleByObjectType(
     OUT Hit,
@@ -101,12 +131,12 @@ FHitResult UGrabber::GetFirstPhysicsBodyInReach() const
     TraceParameters
   );
 
+  /// See what what we hit
   AActor* ActorHit = Hit.GetActor();
-  /// see if actor was if it was get it's name
   if (ActorHit)
   {
-    UE_LOG(LogTemp, Log, TEXT("Objects name is %s"), *ActorHit->GetName());
+    UE_LOG(LogTemp, Warning, TEXT("Line trace hit: %s"), *(ActorHit->GetName()))
   }
 
-  return FHitResult();
+  return Hit;
 }
