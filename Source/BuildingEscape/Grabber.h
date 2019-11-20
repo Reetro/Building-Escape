@@ -49,4 +49,8 @@ private:
   void FindAttachedInputComponent();
 
   const FHitResult GetFirstPhysicsBodyInReach();
+
+  FVector GetReachLineStart();
+
+  FVector GetReachLineEnd();
 };
