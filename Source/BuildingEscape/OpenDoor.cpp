@@ -39,16 +39,14 @@ void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompon
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-  if (GetTotalMassOfActorsOnPlate() > 30.f) // TODO make into a parameter
+  if (GetTotalMassOfActorsOnPlate() > TriggerMass)
 	{
-		OpenDoor();
-		LastDoorOpenTime = GetWorld()->GetTimeSeconds();
+    OnOpen.Broadcast();
 	}
-	
-	if (GetWorld()->GetTimeSeconds() - LastDoorOpenTime > DoorCloseDelay)
-	{
-		CloseDoor();
-	}
+  else 
+  {
+    OnClose.Broadcast();
+  }
 }
 
 float UOpenDoor::GetTotalMassOfActorsOnPlate()
@@ -64,22 +62,8 @@ float UOpenDoor::GetTotalMassOfActorsOnPlate()
   // Iterate through them adding their masses
   for (const auto& Actor : OverlappingActors)
   {
-    TotalMass += Actor->FindComponentByClass<UPrimitiveComponent>()->GetMass();
-    UE_LOG(LogTemp, Warning, TEXT("%s on pressure plate"), *Actor->GetName())
+    TotalMass += Actor->FindComponentByClass<UPrimitiveComponent>()->GetMass(); 
   }
 
   return TotalMass;
-}
-
-void UOpenDoor::OpenDoor()
-{
-  if (!Owner) { return; }
-	Owner->SetActorRotation(FRotator(0.f, OpenAngle, 0.f));
-}
-
-
-void UOpenDoor::CloseDoor()
-{
-  if (!Owner) { return; }
-	Owner->SetActorRotation(FRotator(0.f, 0.f, 0.f));
 }
